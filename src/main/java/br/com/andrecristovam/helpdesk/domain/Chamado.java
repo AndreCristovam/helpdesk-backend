@@ -1,32 +1,57 @@
 package br.com.andrecristovam.helpdesk.domain;
 
+
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import br.com.andrecristovam.helpdesk.domain.enums.EPrioridade;
 import br.com.andrecristovam.helpdesk.domain.enums.EStatus;
 
-public class ChamadoEntity {
+@Entity(name = "tb_chamado")
+public class Chamado implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private LocalDate dataAbertura = LocalDate.now();
+	
+	@JsonFormat(pattern = "dd/MM/yyyy")
 	private LocalDate dataFechamento;
+	@JsonFormat(pattern = "dd/MM/yyyy")
 	private EPrioridade prioridade;
+	
 	private EStatus status;
 	private String titulo;
 	private String observacoes;
 	
-	private TecnicoEntity tecnico;
-	private ClienteEntity cliente;
+	@ManyToOne
+	@JoinColumn(name = "tecnico_id")
+	private Tecnico tecnico;
+	
+	@ManyToOne
+	@JoinColumn(name = "cliente_id")
+	private Cliente cliente;
 	
 	
-	public ChamadoEntity() {
+	public Chamado() {
 		super();
 	}
 
 
-	public ChamadoEntity(Integer id, EPrioridade prioridade, EStatus status, String titulo, String observacoes,
-			TecnicoEntity tecnico, ClienteEntity cliente) {
+	public Chamado(Integer id, EPrioridade prioridade, EStatus status, String titulo, String observacoes,
+			Tecnico tecnico, Cliente cliente) {
 		super();
 		this.id = id;
 		this.prioridade = prioridade;
@@ -108,22 +133,22 @@ public class ChamadoEntity {
 	}
 
 
-	public TecnicoEntity getTecnico() {
+	public Tecnico getTecnico() {
 		return tecnico;
 	}
 
 
-	public void setTecnico(TecnicoEntity tecnico) {
+	public void setTecnico(Tecnico tecnico) {
 		this.tecnico = tecnico;
 	}
 
 
-	public ClienteEntity getCliente() {
+	public Cliente getCliente() {
 		return cliente;
 	}
 
 
-	public void setCliente(ClienteEntity cliente) {
+	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
 	}
 
@@ -142,7 +167,7 @@ public class ChamadoEntity {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		ChamadoEntity other = (ChamadoEntity) obj;
+		Chamado other = (Chamado) obj;
 		return Objects.equals(id, other.id);
 	}
 	
