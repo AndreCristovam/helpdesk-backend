@@ -3,6 +3,8 @@ package br.com.andrecristovam.helpdesk.services;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Service;
@@ -39,6 +41,14 @@ public class tecnicoService {
 		Tecnico newObj = new Tecnico(objDTO);
 		return this.tecnicoRepository.save(newObj);
 	}
+	
+	public Tecnico update(Integer id, @Valid TecnicoDTO objDTO) {
+		objDTO.setId(id);
+		Tecnico oldObj = findById(id);
+		validaCpfEEmail(objDTO);
+		oldObj = new Tecnico(objDTO);
+		return this.tecnicoRepository.save(oldObj);
+	}
 
 	private void validaCpfEEmail(TecnicoDTO objDTO) {
 		Optional<Pessoa> obj = pessoaRepository.findByCpf(objDTO.getCpf());
@@ -51,4 +61,6 @@ public class tecnicoService {
 			throw new DataIntegrityViolationException("E-mail já cadastrado no sistema!");
 		}
 	}
+
+	
 }

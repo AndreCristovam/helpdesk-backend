@@ -32,6 +32,7 @@ public abstract class Pessoa implements Serializable {
 	
 	protected String nome;
 	
+	//@CPF serve para ver se o CPF existe de verdade
 	@Column(unique = true)
 	protected String cpf;
 	
