@@ -45,7 +45,7 @@ public abstract class Pessoa implements Serializable {
 	protected Set<Integer> perfis = new HashSet<>();
 	
 	@JsonFormat(pattern = "dd/MM/yyyy")
-	protected LocalDate date = LocalDate.now();
+	protected LocalDate dataCriacao = LocalDate.now();
 
 	public Pessoa() {
 		super();
@@ -113,11 +113,11 @@ public abstract class Pessoa implements Serializable {
 	}
 
 	public LocalDate getDate() {
-		return date;
+		return dataCriacao;
 	}
 
 	public void setDate(LocalDate date) {
-		this.date = date;
+		this.dataCriacao = date;
 	}
 
 	@Override
