@@ -1,4 +1,4 @@
-package br.com.andrecristovam.helpdesk.services.exceptions;
+package br.com.andrecristovam.helpdesk.controllers.exceptions;
 
 import java.io.Serializable;
 
