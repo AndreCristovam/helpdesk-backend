@@ -1,19 +1,30 @@
 package br.com.andrecristovam.helpdesk.domain.enums;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-
-
-@AllArgsConstructor
 public enum EPerfil {
 
 	ADMIN(0, "ROLE_ADMIN"), CLIENTE(1, "ROLE_CLIENTE"), TECNICO(2, "ROLE_TECNICO");
 	
-	@Getter
+	
 	private Integer codigo;	
-	@Getter
+	
 	private String descricao;	
 	
+	
+	
+	private EPerfil(Integer codigo, String descricao) {
+		this.codigo = codigo;
+		this.descricao = descricao;
+	}
+
+	public Integer getCodigo() {
+		return codigo;
+	}
+
+	public String getDescricao() {
+		return descricao;
+	}
+
+
 	public static EPerfil toEnum(Integer cod) {
 		
 		if (cod == null) {

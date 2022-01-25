@@ -1,19 +1,31 @@
 package br.com.andrecristovam.helpdesk.domain.enums;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-
-
-@AllArgsConstructor
 public enum EPrioridade {
 
 	BAIXA(0, "BAIXA"), MEDIA(1, "MEDIA"), ALTA(2, "ALTA");
 	
-	@Getter
+	
 	private Integer codigo;	
-	@Getter
+	
 	private String descricao;	
 	
+	
+	
+	private EPrioridade(Integer codigo, String descricao) {
+		this.codigo = codigo;
+		this.descricao = descricao;
+	}
+
+	public Integer getCodigo() {
+		return codigo;
+	}
+
+
+	public String getDescricao() {
+		return descricao;
+	}
+
+
 	public static EPrioridade toEnum(Integer cod) {
 		
 		if (cod == null) {
