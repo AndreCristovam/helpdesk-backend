@@ -36,19 +36,34 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private UserDetailsService userDetailsService;
 	
+//	@Override
+//	protected void configure(HttpSecurity http) throws Exception {
+//		
+//		if(Arrays.asList(env.getActiveProfiles()).contains("test")) {
+//			http.headers().frameOptions().disable();
+//		}
+//		
+//		http.cors().and().csrf().disable();
+//		http.addFilter(new JWTAuthenticationFilter(authenticationManager(), jwtUtil));
+//		http.addFilter(new JWTAuthorizationFilter(authenticationManager(), jwtUtil, userDetailsService));
+//		http.authorizeRequests().antMatchers(PUBLIC_MATCHER).permitAll()
+//								.anyRequest().authenticated();		
+//		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+//	}
+	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		
 		if(Arrays.asList(env.getActiveProfiles()).contains("test")) {
 			http.headers().frameOptions().disable();
 		}
 		
-		http.cors().and().csrf().disable();
+		http.cors().and().csrf().disable();		
 		http.addFilter(new JWTAuthenticationFilter(authenticationManager(), jwtUtil));
-		http.addFilter(new JWTAuthorizationFilter(authenticationManager(), jwtUtil, userDetailsService));
-		http.authorizeRequests().antMatchers(PUBLIC_MATCHER).permitAll()
-								.anyRequest().authenticated();		
-		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+		http.addFilter(new JWTAuthorizationFilter(authenticationManager(), jwtUtil, userDetailsService));		
+		http.authorizeRequests()
+						.antMatchers(PUBLIC_MATCHER).permitAll() 
+						.anyRequest().authenticated(); 		
+		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);	
 	}
 	
 	@Override
