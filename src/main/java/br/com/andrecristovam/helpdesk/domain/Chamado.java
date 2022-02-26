@@ -16,6 +16,8 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 import br.com.andrecristovam.helpdesk.domain.enums.EPrioridade;
 import br.com.andrecristovam.helpdesk.domain.enums.EStatus;
+import lombok.Data;
+
 
 @Entity(name = "tb_chamado")
 public class Chamado implements Serializable {
