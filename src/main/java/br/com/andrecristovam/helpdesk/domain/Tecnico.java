@@ -12,6 +12,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import br.com.andrecristovam.helpdesk.domain.dto.TecnicoDTO;
 import br.com.andrecristovam.helpdesk.domain.enums.EPerfil;
 
+
 @Entity(name = "tb_tecnico")
 public class Tecnico extends Pessoa{
 
@@ -28,6 +29,7 @@ public class Tecnico extends Pessoa{
 
 	public Tecnico(Integer id, String nome, String cpf, String email, String senha) {
 		super(id, nome, cpf, email, senha);
+		addPerfil(EPerfil.TECNICO);
 	}
 	
 	public Tecnico(TecnicoDTO obj) {
@@ -47,13 +49,5 @@ public class Tecnico extends Pessoa{
 
 	public void setChamados(List<Chamado> chamados) {
 		this.chamados = chamados;
-	}
-
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
-	
-	
-
-	
+	}	
 }

@@ -12,6 +12,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import br.com.andrecristovam.helpdesk.domain.dto.ClienteDTO;
 import br.com.andrecristovam.helpdesk.domain.enums.EPerfil;
 
+
 @Entity(name = "tb_cliente")
 public class Cliente extends Pessoa {	
 	
@@ -48,8 +49,6 @@ public class Cliente extends Pessoa {
 
 	public void setChamados(List<Chamado> chamados) {
 		this.chamados = chamados;
-	}
-	
-	
+	}	
 
 }
